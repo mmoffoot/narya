@@ -2,10 +2,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import mxnet as mx
 
 import numpy as np
 import tensorflow as tf
+os.environ['SM_FRAMEWORK'] = 'tf.keras'
 import segmentation_models as sm
 from .keras_layers import pyramid_layer
 from ..preprocessing.image import _build_homo_preprocessing
@@ -43,12 +45,12 @@ def _build_resnet18():
 
 
 class DeepHomoModel:
-    """Class for Keras Models to predict the corners displacement from an image. These corners can then get used 
+    """Class for Keras Models to predict the corners displacement from an image. These corners can then get used
     to compute the homography.
 
     Arguments:
         pretrained: Boolean, if the model is loaded pretrained on ImageNet or not
-        input_shape: Tuple, shape of the model's input 
+        input_shape: Tuple, shape of the model's input
     Call arguments:
         input_img: a np.array of shape input_shape
     """
@@ -98,7 +100,7 @@ class KeypointDetectorModel:
         backbone: String, the backbone we want to use
         model_choice: The model architecture. ('FPN','Unet','Linknet')
         num_classes: Integer, number of mask to compute (= number of keypoints)
-        input_shape: Tuple, shape of the model's input 
+        input_shape: Tuple, shape of the model's input
     Call arguments:
         input_img: a np.array of shape input_shape
     """

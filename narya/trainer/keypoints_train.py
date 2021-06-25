@@ -2,8 +2,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import mxnet as mx
 import argparse
+os.environ['SM_FRAMEWORK'] = 'tf.keras'
 import segmentation_models as sm
 import keras
 import os
